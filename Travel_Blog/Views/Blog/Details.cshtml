@@ -1,0 +1,64 @@
+﻿@using System.Security.Claims;
+@model Blog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div>
+    <h4>Blog</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+<img style="max-width:25%;max-height:25%" src="@Model.Image.Url" alt="Property Image" />
+    </dl>
+    <hr />
+    @foreach (var destination in Model.Destination)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => destination.Country)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => destination.Country)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => destination.City)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => destination.City)
+            </dd>
+        </dl>
+    }
+</div>
+<div>
+    @if (Model.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit | </a>
+    }
+    <a asp-action="Index">Back to List</a>
+</div>
