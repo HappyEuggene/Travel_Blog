@@ -27,7 +27,7 @@
                 <label asp-for="@Model.Destination.Country" class="control-label"></label>
                 <input asp-for="@Model.Destination.Country" class="form-control" />
                 <span asp-validation-for="@Model.Destination.Country" class="text-danger"></span>
-            </div
+            </div>
             <div class="form-group">
                 <label asp-for="@Model.Destination.City" class="control-label"></label>
                 <input asp-for="@Model.Destination.City" class="form-control" />
@@ -38,7 +38,7 @@
         <input type="file" id="ImageFile" name="ImageFile" class="form-control" />
     </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input id="Create" type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

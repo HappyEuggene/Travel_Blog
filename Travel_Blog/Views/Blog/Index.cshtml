@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.CreationDate)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details | </a>
+                    <a asp-action="Details" id="Details" asp-route-id="@item.Id">Details | </a>
                     @if (item.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit | </a>
