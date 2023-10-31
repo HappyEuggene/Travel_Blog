@@ -15,7 +15,7 @@ namespace Travel9
         }
 
         [TestMethod]
-        public void UserCanLogin()
+        public void BlogCreation()
         {
             _driver.Navigate().GoToUrl("https://localhost:7146/Blog/Create");
 
@@ -36,9 +36,23 @@ namespace Travel9
             var Link = _driver.FindElement(By.Id("Details"));
             Assert.IsNotNull(Link);
         }
+        [TestMethod]
+        public void TestLogin()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:7146/Identity/Account/Login");
 
+            var Blog_Email = _driver.FindElement(By.Id("Input_Email"));
+            var Blog_Password = _driver.FindElement(By.Id("Input_Password"));
+            var Blog_login = _driver.FindElement(By.Id("login-submit"));
+
+            Blog_Email.SendKeys("fd@gmail.com");
+            Blog_Password.SendKeys("Qwerty1!");
+            Blog_login.Click();
+
+            Assert.AreEqual("https://localhost:7146/", _driver.Url);
+        }
         [TestCleanup]
-        public void TearDown()
+        public void CleanUp()
         {
             _driver.Quit();
         }

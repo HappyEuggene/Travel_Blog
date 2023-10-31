@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="TravelBlog20231020135839" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\nalex\\Desktop\\Travel_Blog\\Travel_Blog\\obj\\Release\\net7\.0\\win-x86\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="Travel_Blog.Context.DBContext" description="" value="Server=tcp:fortest.database.windows.net,1433;Initial Catalog=fortest;Persist Security Info=False;User ID=sql-admin;Password=Bendchat1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\nalex\\Desktop\\Travel_Blog\\Travel_Blog\\obj\\Release\\net7\.0\\win-x86\\PubTmp\\EFSQLScripts\\Travel_Blog\.Context\.DBContext\.sql$" />
+  </parameter>
+</parameters>

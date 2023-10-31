@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
 <h1>Blogs</h1>
 
 <table class="table">
@@ -53,3 +53,16 @@
         }
     </tbody>
 </table>
+
+
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/signalrservice").build();
+
+    connection.on("UpdatePage", function () {
+        location.reload();
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+</script>

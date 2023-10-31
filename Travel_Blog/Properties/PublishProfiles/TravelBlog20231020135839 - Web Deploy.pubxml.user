@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArGDQD0st0Uisil57/f8YWQAAAAACAAAAAAAQZgAAAAEAACAAAABZDVL8DELA9Cx+zi2OtRinjv00kuhw6xVaK4y/cRLfHgAAAAAOgAAAAAIAACAAAAB9GNU1vMixMAmHliG+9Vwg0vP+Hy+Ls9d5WbdBfg8qWYAAAABG0KlfGehphMKZow+fxXp+aTr2vBCcRLmzkPn7Z8htXsDSeFdIZt+M5T0suVN4XqcJxhbXNgA3DxEcawZfOYpxvuzLeWjkZCZdUY5Q6V3bMatBPUgi4nfYrJcMlZ9PY76tFOcTPkuOyIFvf6Y0Wh0EP9UiPx/RTfXRCOH1f9FD70AAAADJiwYZH+tJbYvTQH6TyJPzqMXTAwmB3yikLtHU/sUFNaAANU6Ml259zhPiiWQKt4mrLxdLzzOp8OsGxDQvgdDL</EncryptedPassword>
+    <History>True|2023-10-20T11:32:34.2114281Z;True|2023-10-20T14:19:59.9694352+03:00;True|2023-10-20T14:16:55.5454388+03:00;True|2023-10-20T14:12:51.4291007+03:00;True|2023-10-20T14:07:29.8884656+03:00;False|2023-10-20T14:03:30.8174307+03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=tcp:fortest.database.windows.net,1433%3bInitial Catalog=fortest%3bPersist Security Info=False%3bUser ID=sql-admin%3bPassword=Bendchat1%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Travel_Blog.Context.DBContext">
+      <Value>Server=tcp:fortest.database.windows.net,1433%3bInitial Catalog=fortest%3bPersist Security Info=False%3bUser ID=sql-admin%3bPassword=Bendchat1%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

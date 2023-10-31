@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Travel_Blog.Context;
 using Travel_Blog.External;
@@ -16,11 +17,13 @@ namespace Travel_Blog.Controllers
     {
         private readonly DBContext _context;
         private readonly BlobService _blobService;
+        private readonly IHubContext<SignalRService> _hubContext;
 
-        public BlogController(DBContext context, BlobService blobService)
+        public BlogController(DBContext context, BlobService blobService, IHubContext<SignalRService> hubContext)
         {
             _context = context;
             _blobService = blobService;
+            _hubContext = hubContext;
         }
 
         // GET: Blog
@@ -96,8 +99,9 @@ namespace Travel_Blog.Controllers
             var viewModel = new ViewModelBlog
             {
                 Blog = blog,
-                Destination = blog.Destination.FirstOrDefault()  // Assume each blog has at least one destination
+                Destination = blog.Destination.FirstOrDefault()  
             };
+            
             return View(viewModel);
         }
 
@@ -113,35 +117,36 @@ namespace Travel_Blog.Controllers
                 return NotFound();
             }
 
-                try
+            try
+            {
+                var blog = await _context.Blogs.Include(b => b.Destination)
+                                               .FirstOrDefaultAsync(b => b.Id == id);
+                if (blog == null)
                 {
-                    var blog = await _context.Blogs.Include(b => b.Destination)
-                                                   .FirstOrDefaultAsync(b => b.Id == id);
-                    if (blog == null)
-                    {
-                        return NotFound();
-                    }
-
-                    blog.Title = viewModel.Blog.Title;
-                    blog.Content = viewModel.Blog.Content;
-                    blog.Destination.FirstOrDefault().Country = viewModel.Destination.Country;  // Assume each blog has at least one destination
-                    blog.Destination.FirstOrDefault().City = viewModel.Destination.City;
-
-                    _context.Update(blog);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                blog.Title = viewModel.Blog.Title;
+                blog.Content = viewModel.Blog.Content;
+                blog.Destination.FirstOrDefault().Country = viewModel.Destination.Country;  // Assume each blog has at least one destination
+                blog.Destination.FirstOrDefault().City = viewModel.Destination.City;
+
+                _context.Update(blog);
+                await _context.SaveChangesAsync();
+                await _hubContext.Clients.All.SendAsync("UpdatePage");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BlogExists(viewModel.Blog.Id))
                 {
-                    if (!BlogExists(viewModel.Blog.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Blog/Delete/5
